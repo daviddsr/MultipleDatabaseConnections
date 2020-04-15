@@ -3,29 +3,22 @@
 namespace App\Controller;
 
 use App\Entity\Product;
+use Doctrine\Common\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class LuckyController extends AbstractController
+class ProductController extends AbstractController
 {
-    public function number(Request $request, EntityManagerInterface $em)
+    public function findAllProducts()
     {
-        /*
-        $activeEntityManager = $this->getDoctrine()->getManager('default');
+        $activeEntityManager = $this->getDoctrine()->getManager('one');
 
         $products = $activeEntityManager
             ->getRepository(Product::class)
             ->setEntityManager($activeEntityManager)
-            ->findAll();
-
-        */
-
-
-        $products = $this->getDoctrine()
-            ->getRepository(Product::class, "one")
             ->findAll();
 
         $responseArray = [];
